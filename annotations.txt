@@ -5,4 +5,4 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula: 
-225. O protocolo HTTP e seus métodos são importantes para criarmos nossas rotas
+226. Nossa API Rest - Entenda as rotas que vamos criar + caminhos + métodos HTTP
