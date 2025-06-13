@@ -5,25 +5,6 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula: 
-223. Aulão sobre o que é cada coisa dentro do NestJS (Module, Controller e Provider)
+224. Extensão Rest Client para requisições HTTP e configuração do git
 
-Como o coach-Luiz ressaltou o Nest.js é um framework que tem uma "opinião própria muito
-forte". Isso quer dizer que o desenvolvedor precisa programar de acordo com as recomendações
-da documentação do Nest.js para evitar o mal funcionamento da aplicação.
-
-Assim, é uma das regras que o Nest.js estabelece para o dev é a de que os módulos criados
-na aplicação são encapsulados. Assim, nada que há dentro deles é exposto para outros módulos.
-Uma maneira de "corrigir" isso é com o 'decorator' '@Module':
-
-@Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
-  exports: [],
-})
-export class AppModule {}
-
-Ora, a classe 'AppModule' é uma classe TypeScript comum. Com o uso do '@Module', O Nest.js passa
-a reconhecer essa classe como um módulo da aplicação. Com o uso das propriedades do objeto que esse
-'decorator' recebe, é possível importar e exportar coisas por meio desse módulo. Assim é feita
-a comunicação entre os módulos de um app Nest.js.
+Dependências (extensões) → REST Client
