@@ -5,4 +5,20 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula: 
-226. Nossa API Rest - Entenda as rotas que vamos criar + caminhos + métodos HTTP
+227. Auth - Criando um Module, Controller e Service na mão (/auth/login)
+
+Observando o arquivo REQUEST-RESPONSE.md é possível chegar a algumas conclusões:
+
+Cada rota (auth, users, posts, uploads) representa um recurso que a aplicação oferece.
+Assim, uma regra do Nest.js é clara:
+→ se tem rota tem 'controller'.
+
+Todos esses recursos são criados como módulos, pois é dessa maneira que o Nest.js reconhece
+esses recursos. 
+
+→ Todo o recurso acessado aplica uma regra de negócio.
+Assim, as regras de negócio são executados por meio dos 'services'. É nesse arquivo
+que ficam as regras de negócio do recurso.
+
+Lembrando que existem algumas exceções que o desenvolvedor pode programar dentro dos limites
+das regras que o Nest.js estabelece.
