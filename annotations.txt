@@ -5,6 +5,4 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula: 
-224. Extensão Rest Client para requisições HTTP e configuração do git
-
-Dependências (extensões) → REST Client
+225. O protocolo HTTP e seus métodos são importantes para criarmos nossas rotas
