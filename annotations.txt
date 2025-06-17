@@ -5,7 +5,17 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula: 
-228. Injetando o AuthService no AuthController e testando a rota
+229. Criando Module, Controller, Service, DTO e Entity automaticamente com o nest cli
 
-Conforme o código da aula, o 'controller' somente repassa a chamada para o 'service'. Por isso
-os nomes dos métodos normalmente são iguais.
+npx nest --help | exibe alguns comandos que agilizam a criação dos módulos e suas dependências
+npx nest generate|g mo <module_name> | gera um módulo
+npx nest g s <module_name> --no-spec | gera um service sem o arquivo de testes
+npx nest g co <module_name> --no-spec | gera um controller sem o arquivo de testes
+
+npx nest g cl user/entities/user.entity --no-spec --flat | gera uma classe sem criar um sub-diretório
+
+npx nest g cl user/dto/create.user.dto --no-spec --flat | gera uma classe que servirá como DTO para a
+criação de um usuário
+
+npx nest g cl user/dto/update.user.dto --no-spec --flat | gera uma classe que servirá como DTO para a
+atualização de um usuário
