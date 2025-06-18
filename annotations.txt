@@ -5,15 +5,4 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula: 
-231. Body - criando e recebendo o corpo da requisição POST, PATCH e PUT
-
-Pergunta: ao fazer uma "postagem" de um arquivo JSON, por exemplo, e
-recebê-lo um uma função que decora um método HTTP POST, esse arquivo
-deverá seguir algum formato específico? (Lembrando que esse arquivo está no CORPO da requisição).
-
-Bom, é nesse cenário que entra o Design Patterns DTO. Pois, esse padrão GARANTE que a estrutura do
-dado não será comprometida e ainda permite realizar algumas verificações e validações nesses dados.
-
-Outro benefício é que o Dev fica sabendo exatamente qual o tipo dado que o recurso está usando.
-
-Em um primeiro momento, o DTO serve apenas para tipagem dos dados. Posteriormente, ele validará esses dados.
+232. Param - Recebendo parâmetros dinâmicos no Controller da request do NestJS
