@@ -5,4 +5,28 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula: 
-232. Param - Recebendo parâmetros dinâmicos no Controller da request do NestJS
+233. ValidationPipe e class-validator para validação dos dados da request no NestJS
+
+Dependências para instalar:
+npm i class-validator class-transformer
+
+[arquivo main.ts]:
+
+app.useGlobalPipes(
+  new ValidationPipe({
+    whitelist: true,
+  }),
+);
+
+A propriedade 'whitelist' elimina todas as propriedades das classes DTO que não
+possuem um 'decorator'. Por isso, deve-se evitar propriedades sem 'decorator'.
+
+[arquivo auth/dto/login.dto.ts]:
+
+import { Type } from 'class-transformer';
+
+@Allow()
+@Type(() => Number)
+foo: number;
+
+O 'decorator' @Type converte o valor recebido do corpo da requisição no tipo 'Number'.
