@@ -5,28 +5,16 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula: 
-233. ValidationPipe e class-validator para validação dos dados da request no NestJS
+234. Transformando e validando parâmetros com Pipes + Customizando Pipes
 
-Dependências para instalar:
-npm i class-validator class-transformer
+O Nest.js permite o Dev criar seus próprios 'pipes'. Eles são úteis para
+transformar e validar os dados, além de parar a requisição caso desejar.
 
-[arquivo main.ts]:
+Os HTTP status codes, em específico os de erros (400 - 499), são lançados pelo
+Nest.js como Exceções, ou seja, em alguns casos, é possível usar a classe que
+instancia esses erros para, por exemplo, personalizar a mensagem de erro.
 
-app.useGlobalPipes(
-  new ValidationPipe({
-    whitelist: true,
-  }),
-);
-
-A propriedade 'whitelist' elimina todas as propriedades das classes DTO que não
-possuem um 'decorator'. Por isso, deve-se evitar propriedades sem 'decorator'.
-
-[arquivo auth/dto/login.dto.ts]:
-
-import { Type } from 'class-transformer';
-
-@Allow()
-@Type(() => Number)
-foo: number;
-
-O 'decorator' @Type converte o valor recebido do corpo da requisição no tipo 'Number'.
+Até essa aula, foram mostradas alguns funcionamentos internos do Nest.js.
+Pelo visto os 'pipes' são vitais para o controle das requisições que são feitas
+por meio dos HTTP methods. Esses pipes fazem validações, conversões e também
+lançam exceções.
