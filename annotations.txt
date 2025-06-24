@@ -4,47 +4,45 @@ React 19 e Next.js 15 com App Router, Server Actions, Server Components, Tailwin
 Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
-Aula: 
-235. Variáveis de ambiente, .env e ConfigModule (nestjs/config)
+Aula:
+236. Base de dados com TypeOrmModule (TypeORM) e as variáveis de ambiente (.env)
 
-npm i @nestjs/config
+Para que o acesso à base de dados seja possível, são necessários muitos passos.
 
-No NestJS, somente o conteúdo da pasta 'src' sofre rebuild. Assim, caso o arquivo '.env' sofra alterações,
-é necessário recarregar o servidor.
+O que o projeto tem até o momento? Bom, o projeto possui alguns módulos e esses módulos
+estão sendo importados pelo AppModule e já possuem uma estrutura que permite começar a configurar
+as etapas necessárias para a conexão com a base de dados.
 
-Nessa aula, o coach-Luiz refez o processo de se usar uma dependência que foi instalada (ConfigModule) por
-INJETAR  dependência em um 'controller' para que se possa usar os recursos usando as melhores práticas que
-o NestJS recomenda.
-Algo que é digno de nota é que caso um módulo seja importado pelo AppController e ele não esteja disponível
-GLOBALMENTE, ao ser injetada essa dependência em um módulo diferente do AppController, o NestJS lançará uma
-exceção afirmando que não consegue encontrar esse módulo.
-Resumo da solução: todo módulo importado pelo AppModule que não é global precisa ser reconhecido pelos outros módulos
-que estão usando esse módulo. Assim, uma maneira de resolver esse problema, é inserir esse módulo (que está sendo injetado)
-no array de 'providers' do arquivo 'module' do recurso que usará esse módulo.
+Por exemplo, será criada um registro de USUÁRIO na base de dados. Esse módulo possui:
 
-Outra solução: ao importar esse módulo, é possível definir ele como global:
+-> user
+  -> dto
+    -> create-user.dto.ts
+    -> update-user.dto.ts
+  -> entities
+    user.entity.ts
+  -> user.controller.ts
+  -> user.module.ts
+  -> user.service.ts
 
-@Module({
-  imports: [
-    AuthModule,
-    UserModule,
-    PostModule,
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-  ],
-})
-export class AppModule {}
+>>> user.entity.ts contém uma 'class User {}'
+  Essa classe será a representação dos dados no paradigma relacional que é usado por banco de dados
+  como sqlite, Postgres, MariaDB, etc.
 
-Assim, o os recursos oriundos de ConfigModule ficam disponíveis para todos os módulos
-da aplicação visto que o AppModule é o módulo que importa todos os módulos.
+  É aí que entra as ferramentas do tipo ORM, ou seja, são ferramentas que traduzem um objeto JavaScript
+  em uma tabela do banco de dados relacional e vice-versa.
+  Sao usado 'decorators' para que os campos desse objeto sejam tipados e reconhecidos pelo banco de dados
+  relacional.
 
-Para acessar o valor da variável de ambiente [no 'UserController']:
+Seguem os passos para começar a configuração para acesso à base de dados:
 
-process.env.TESTE || 'default_value';
-ou
-this.configService.get('TESTE', 'default_value');
+-> npm i @nestjs/typeorm typeorm better-sqlite3 | o último argumento pode ser substituído por um 'driver' do banco de dados
+que o dev quiser.
 
-Para dados críticos, é possível lançar uma exceção caso essa variável não exista:
+-> configurar dot-env | será usado sqlite
 
-this.configService.getOrThrow('TESTE');
+-> configurar módulo TypeOrmModule no AppModule
+  -> método 'forRoot' | é possível configurar a base de dados usando as variáveis de ambiente
+  -> método 'forRootAsync' | é possível usar o método 'useFactory' o qual permite escrever código JavaScript
+    personalizado e depois retornar um objeto contendo as configurações exigidas pelo TypeOrmModule para se
+    conectar na base de dados
