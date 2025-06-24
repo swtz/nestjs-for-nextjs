@@ -5,16 +5,46 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula: 
-234. Transformando e validando parâmetros com Pipes + Customizando Pipes
+235. Variáveis de ambiente, .env e ConfigModule (nestjs/config)
 
-O Nest.js permite o Dev criar seus próprios 'pipes'. Eles são úteis para
-transformar e validar os dados, além de parar a requisição caso desejar.
+npm i @nestjs/config
 
-Os HTTP status codes, em específico os de erros (400 - 499), são lançados pelo
-Nest.js como Exceções, ou seja, em alguns casos, é possível usar a classe que
-instancia esses erros para, por exemplo, personalizar a mensagem de erro.
+No NestJS, somente o conteúdo da pasta 'src' sofre rebuild. Assim, caso o arquivo '.env' sofra alterações,
+é necessário recarregar o servidor.
 
-Até essa aula, foram mostradas alguns funcionamentos internos do Nest.js.
-Pelo visto os 'pipes' são vitais para o controle das requisições que são feitas
-por meio dos HTTP methods. Esses pipes fazem validações, conversões e também
-lançam exceções.
+Nessa aula, o coach-Luiz refez o processo de se usar uma dependência que foi instalada (ConfigModule) por
+INJETAR  dependência em um 'controller' para que se possa usar os recursos usando as melhores práticas que
+o NestJS recomenda.
+Algo que é digno de nota é que caso um módulo seja importado pelo AppController e ele não esteja disponível
+GLOBALMENTE, ao ser injetada essa dependência em um módulo diferente do AppController, o NestJS lançará uma
+exceção afirmando que não consegue encontrar esse módulo.
+Resumo da solução: todo módulo importado pelo AppModule que não é global precisa ser reconhecido pelos outros módulos
+que estão usando esse módulo. Assim, uma maneira de resolver esse problema, é inserir esse módulo (que está sendo injetado)
+no array de 'providers' do arquivo 'module' do recurso que usará esse módulo.
+
+Outra solução: ao importar esse módulo, é possível definir ele como global:
+
+@Module({
+  imports: [
+    AuthModule,
+    UserModule,
+    PostModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+  ],
+})
+export class AppModule {}
+
+Assim, o os recursos oriundos de ConfigModule ficam disponíveis para todos os módulos
+da aplicação visto que o AppModule é o módulo que importa todos os módulos.
+
+Para acessar o valor da variável de ambiente [no 'UserController']:
+
+process.env.TESTE || 'default_value';
+ou
+this.configService.get('TESTE', 'default_value');
+
+Para dados críticos, é possível lançar uma exceção caso essa variável não exista:
+
+this.configService.getOrThrow('TESTE');
