@@ -5,4 +5,4 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-237. Criando a Entity User e os campos + colunas na tabela da base de dados
+238. Abstração para "programar para interfaces" no NestJS com Bcrypt
