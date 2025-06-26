@@ -5,44 +5,4 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-236. Base de dados com TypeOrmModule (TypeORM) e as variáveis de ambiente (.env)
-
-Para que o acesso à base de dados seja possível, são necessários muitos passos.
-
-O que o projeto tem até o momento? Bom, o projeto possui alguns módulos e esses módulos
-estão sendo importados pelo AppModule e já possuem uma estrutura que permite começar a configurar
-as etapas necessárias para a conexão com a base de dados.
-
-Por exemplo, será criada um registro de USUÁRIO na base de dados. Esse módulo possui:
-
--> user
-  -> dto
-    -> create-user.dto.ts
-    -> update-user.dto.ts
-  -> entities
-    user.entity.ts
-  -> user.controller.ts
-  -> user.module.ts
-  -> user.service.ts
-
->>> user.entity.ts contém uma 'class User {}'
-  Essa classe será a representação dos dados no paradigma relacional que é usado por banco de dados
-  como sqlite, Postgres, MariaDB, etc.
-
-  É aí que entra as ferramentas do tipo ORM, ou seja, são ferramentas que traduzem um objeto JavaScript
-  em uma tabela do banco de dados relacional e vice-versa.
-  Sao usado 'decorators' para que os campos desse objeto sejam tipados e reconhecidos pelo banco de dados
-  relacional.
-
-Seguem os passos para começar a configuração para acesso à base de dados:
-
--> npm i @nestjs/typeorm typeorm better-sqlite3 | o último argumento pode ser substituído por um 'driver' do banco de dados
-que o dev quiser.
-
--> configurar dot-env | será usado sqlite
-
--> configurar módulo TypeOrmModule no AppModule
-  -> método 'forRoot' | é possível configurar a base de dados usando as variáveis de ambiente
-  -> método 'forRootAsync' | é possível usar o método 'useFactory' o qual permite escrever código JavaScript
-    personalizado e depois retornar um objeto contendo as configurações exigidas pelo TypeOrmModule para se
-    conectar na base de dados
+237. Criando a Entity User e os campos + colunas na tabela da base de dados
