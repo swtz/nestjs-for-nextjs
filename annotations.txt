@@ -7,16 +7,4 @@ NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 Aula:
 238. Abstração para "programar para interfaces" no NestJS com Bcrypt
 
-A partir desse ponto, começa o desenvolvimento da(s) 'interface(s)' que o aplicação
-se comunicará para fazer o 'hashing' da senha do usuário. Esse passo a passo que está sendo
-feito pode ser usado como base para desenvolver outras soluções baseadas em "programar para interfaces".
-Isso é muito útil, pois o código não passar a depender mais de uma implementação e sim de uma abstração.
-Dessa forma o código fica mais fácil de manter e de se testar.
-
-O que foi feito até agora?
-
--> criação do módulo 'common.module.rs' | esse módulo exportará alguns services que ficarão disponíveis para
-toda a aplicação;
-
--> criação do pacote 'hashing' e da classe abstrata 'HashingService' onde foram codificados os contratos que
-todas as classes que estenderem a classe abstrata terão de implementar.
+npm i bcryptjs
