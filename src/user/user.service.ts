@@ -23,5 +23,16 @@ export class UserService {
     if (exists) {
       throw new ConflictException('Email já existe');
     }
+
+    const hashedPassword = await this.hashingService.hash(dto.password);
+    const newUser = {
+      name: dto.name,
+      email: dto.email,
+      password: hashedPassword,
+    };
+
+    const created = await this.userRepository.save(newUser);
+
+    return created;
   }
 }

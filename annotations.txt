@@ -6,28 +6,3 @@ NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
 238. Abstração para "programar para interfaces" no NestJS com Bcrypt
-
-Dica do NestJS:
-
-@Module({
-  providers: [
-    {
-      provide: HashingService,
-      useClass: BcryptHashingService,
-    },
-  ],
-  exports: [HashingService],
-})
-export class CommonModule {}
-
-Ao invés de passar um serviço diretamente no array de 'providers', é possível passar um {} passando a Abstração
-para 'provide' e a Implementação para 'useClass'. Assim, ao injetar esse dependência, o NestJS usa os métodos da
-Abstração, mas injeta o valor da Implementação durante a execução da aplicação. Assim é possível exportar o 'nome' do
-que será usado. Nesse caso, será usada a Abstração 'HashingService'.
-
-Agora, é possível IMPORTAR esse módulo em algum outro módulo que fará uso dele. Depois é possível injetar
-as dependências desse módulo. Assim, como é mostrado mais acima, ao injetar 'HashingService' em um service, por exemplo,
-o NestJS "puxa a cadeia de importações/exportações" e consegue reconhecer e INJETAR essa dependência.
-
-Compreendendo bem esse fluxo é possível ter autonomia em desenvolver soluções desacopladas que se comunicam por meio
-do sistema de DI (Dependency Injection) do NestJS.
