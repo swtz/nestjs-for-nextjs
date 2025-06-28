@@ -34,4 +34,8 @@ export class UserService {
     const created = this.userRepository.save(newUser);
     return created;
   }
+
+  findByEmail(email: string) {
+    return this.userRepository.findOneBy({ email });
+  }
 }
