@@ -31,8 +31,7 @@ export class UserService {
       password: hashedPassword,
     };
 
-    const created = await this.userRepository.save(newUser);
-
+    const created = this.userRepository.save(newUser);
     return created;
   }
 }
