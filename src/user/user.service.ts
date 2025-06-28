@@ -35,7 +35,7 @@ export class UserService {
     return created;
   }
 
-  findByEmail(email: string) {
+  async findByEmail(email: string) {
     return this.userRepository.findOneBy({ email });
   }
 }
