@@ -6,26 +6,3 @@ NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
 239. Assinando o JWT Token e autenticando o usuário com @nestjs/jwt
-
-Os dados do usuário já foram salvos na base de dados e já existe o método de comparar
-uma senha com um hash. Assim, a única coisa que falta é assinar o JWT, por que os dados
-já estão prontos e checados.
-
-Por isso, ao desenvolver um backend para sistema de login, é importante ter os usuários para
-depois fazer esse sistema.
-
-Algo que ajuda também é o fato do TypeORM já fornecer um repository, para que as informações na
-base de dados sejam manipuladas.
-
-npm i @nestjs/jwt
-
-Overview do que será desenvolvido nessa aula (até então):
-
-O authService precisa checar se o email enviado pela requisição POST existe na base de dados.
-Será usado o userService. Depois a senha enviada na mesma requisição será comparada com o hash
-que existe na base de dados, ou seja, será preciso o hashingService.
-Assim, quando um módulo precisa de outro, é necessário exportar o módulo que será usado, importar aonde
-será usado e injetar a dependência no xxxService que será usada.
-
-Lembrando que os 'imports' e 'exports' estão relacionado ao arquivos MODULE. E a injeção de dependência
-está relacionada aos arquivos SERVICE.
