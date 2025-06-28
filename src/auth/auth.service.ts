@@ -1,13 +1,16 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { LoginDto } from './dto/login.dto';
-import { UserService } from 'src/user/user.service';
+import { JwtService } from '@nestjs/jwt';
 import { HashingService } from 'src/common/hashing/hashing.service';
+import { UserService } from 'src/user/user.service';
+import { LoginDto } from './dto/login.dto';
+import { JwtPayload } from './types/jwt-payload.type';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly hashingService: HashingService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async login(loginDto: LoginDto) {
@@ -27,6 +30,13 @@ export class AuthService {
       throw error;
     }
 
-    return loginDto;
+    const jwtPayload: JwtPayload = {
+      sub: user.id,
+      email: user.email,
+    };
+
+    const accessToken = await this.jwtService.signAsync(jwtPayload);
+
+    return { accessToken };
   }
 }
