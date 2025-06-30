@@ -5,8 +5,7 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-240. Entenda a autenticação com JWT usando o Header Authorization Bearer (+Passport)
+241. Implementando a autenticação JWT com Passport Strategy no NestJS
 
-Toda vez que uma 'rota fechada' for acessada, o sistema vai verificar o JWT Token é válido
-(com base na secret key) e também se ele não expirou. Outra checagem vai ser na propriedade
-'forceLogout' que indica se o usuário alterou alguma informação do seu cadastro.
+npm i @nestjs/passport passport passport-jwt
+npm i -D @types/passport-jwt
