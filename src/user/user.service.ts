@@ -57,10 +57,14 @@ export class UserService {
     return this.userRepository.findOneBy({ id });
   }
 
-  update(id: string, userDto: UpdateUserDto) {
+  async update(id: string, userDto: UpdateUserDto) {
     if (!userDto.name && !userDto.email) {
       throw new BadRequestException('Dados não enviados');
     }
+
+    const user = await this.findOneByOrFail({ id });
+
+    user.name = userDto.name ?? user.name;
   }
 
   save(user: User) {

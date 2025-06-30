@@ -6,3 +6,39 @@ NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
 243. Atualizando o usuário (PATCH) + usando mapped-types nos DTOs do NestJS
+
+A combinação [arquivo 'service']...
+
+async findOneByOrFail(userData: Partial<User>) {
+  const user = await this.userRepository.findOneBy(userData);
+
+  if (!user) {
+    throw new NotFoundException('Usuário não encontrado');
+  }
+
+  return user;
+}
+
+async update(id: string, userDto: UpdateUserDto) {
+  if (!userDto.name && !userDto.email) {
+    throw new BadRequestException('Dados não enviados');
+  }
+
+  const user = await this.findOneByOrFail({ id });
+
+  console.log(user);
+}
+
+findOneByOrFail(userData: Partial<User>) <--- definição
+await this.findOneByOrFail({ id }) <--- uso
+
+...pode ser muito útil para 'tipar' o parâmetro de um método usando uma Entity, porém tornando
+opcional as propriedades dela. Assim, quando for usá-lo, é possível passar somente um
+argumento de um método que está sendo usado pelo 'controller' para fazer uma consulta
+na base de dados usando o repositório. Assim não é necessário passar todas as informações que
+o tipo da Entity exige.
+
+Como o método 'findOneByOrFail' lança uma Exceção, o retorno dele é apenas o tipo 'User'.
+Ou seja, caso o método não encontre nada na base de dados, o código é interrompido; caso encontre,
+é retornado um objeto do tipo 'User'. É interessante fazer isso, pois esse retorno não fica, por exemplo:
+'User | null' ou 'User | undefined' o que às vezes gera um dorzinha de cabeça para o programador.
