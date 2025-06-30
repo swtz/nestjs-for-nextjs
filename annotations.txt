@@ -9,3 +9,28 @@ Aula:
 
 npm i @nestjs/passport passport passport-jwt
 npm i -D @types/passport-jwt
+
+O que compreendi dessa aula?
+
+- É feita a implementação da JWT Strategy (Passport) com @Injectable();
+- Essa classe é colocada como dependência do AuthModule na propriedade 'providers';
+- Importante:
+  - Na rota em que se deseja 'fechar' as requisições [arquivo 'controller'] é usado:
+    - @UseGuards() | é uma das muitas maneiras de se controlar o acesso às rotas de um app NestJs
+    - AuthGuard('jwt') | esse 'guard' vem do '@nestjs/passport'
+
+Exemplo de uso:
+
+@Controller('user')
+export class UserController {
+  @UseGuards(AuthGuard('jwt'))
+  @Get(':id')
+  findOne(@Param('id', CustomParseInPipe) id: number) {
+    return `Olá UserController!, id:${id}`;
+  }
+}
+
+Agora, ao fazer a requisição para 'localhost:3000/user/123456'
+O 'AuthGuard' executará a implementação do JWT Strategy (pelo que entendi), ou seja,
+se o JWT Token não for válido, é lançada uma exceção/resposta com código HTTP 401 'Unauthorized'; senão,
+será executado o código do método 'findOne'.
