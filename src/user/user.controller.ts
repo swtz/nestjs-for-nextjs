@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   Req,
   UseGuards,
@@ -12,6 +13,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { AuthenticatedRequest } from 'src/auth/types/authenticated-request';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 export class UserController {
@@ -30,5 +32,11 @@ export class UserController {
   @Post()
   create(@Body() userDto: CreateUserDto) {
     return this.userService.create(userDto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('me')
+  update(req: AuthenticatedRequest, @Body() userDto: UpdateUserDto) {
+    return this.userService.update(req.user.id, userDto);
   }
 }
