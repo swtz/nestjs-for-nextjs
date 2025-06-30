@@ -5,32 +5,33 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-241. Implementando a autenticação JWT com Passport Strategy no NestJS
-
-npm i @nestjs/passport passport passport-jwt
-npm i -D @types/passport-jwt
+242. Protegendo rotas com JwtAuthGuard personalizado (JWT + NestJS)
 
 O que compreendi dessa aula?
 
-- É feita a implementação da JWT Strategy (Passport) com @Injectable();
-- Essa classe é colocada como dependência do AuthModule na propriedade 'providers';
-- Importante:
-  - Na rota em que se deseja 'fechar' as requisições [arquivo 'controller'] é usado:
-    - @UseGuards() | é uma das muitas maneiras de se controlar o acesso às rotas de um app NestJs
-    - AuthGuard('jwt') | esse 'guard' vem do '@nestjs/passport'
+Primeiro, foi criado um 'AuthGuard' personalizado (JwtAuthGuard) para modificar algumas informações
+dessa classe no meio da sua execução (arquivo jwt-auth.guard.ts).
 
-Exemplo de uso:
+Segundo, por meio do uso desse 'JwtAuthGuard' é possível ter acesso aos dados do usuário
+por conta do método obrigatório 'validate' na implementação do JWT strategy.
 
-@Controller('user')
-export class UserController {
-  @UseGuards(AuthGuard('jwt'))
-  @Get(':id')
-  findOne(@Param('id', CustomParseInPipe) id: number) {
-    return `Olá UserController!, id:${id}`;
-  }
+Entretanto, o 'express', que é o servidor de requisições HTTP usado por debaixo dos panos nesse projeto
+possibilita o acesso a esses dados do usuário (objeto 'user') que fica dentro da requisição.
+
+Porém, é possível extender a interface 'Request' do 'express' e definir o tipo do objeto 'user' com base
+na Entity criada anteriormente. Isso evita erros de tipagem quando for usado esse objeto em alguma rota "fechada".
+
+Resumindo, quando for usada a combinação [arquivo 'controller']:
+
+@UseGuards(JwtAuthGuard) <---
+@Get(':id')
+findOne(
+  @Req() req: AuthenticatedRequest, <---
+  @Param('id', CustomParseInPipe) id: number,
+) {
+  console.log(req.user.email); <---
+  return `Olá UserController!, id:${id}`;
 }
 
-Agora, ao fazer a requisição para 'localhost:3000/user/123456'
-O 'AuthGuard' executará a implementação do JWT Strategy (pelo que entendi), ou seja,
-se o JWT Token não for válido, é lançada uma exceção/resposta com código HTTP 401 'Unauthorized'; senão,
-será executado o código do método 'findOne'.
+É importante usar a interface 'AuthenticatedRequest' para que o objeto user siga a tipagem
+definida na Entity User.
