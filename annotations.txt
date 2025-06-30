@@ -5,4 +5,8 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-239. Assinando o JWT Token e autenticando o usuário com @nestjs/jwt
+240. Entenda a autenticação com JWT usando o Header Authorization Bearer (+Passport)
+
+Toda vez que uma 'rota fechada' for acessada, o sistema vai verificar o JWT Token é válido
+(com base na secret key) e também se ele não expirou. Outra checagem vai ser na propriedade
+'forceLogout' que indica se o usuário alterou alguma informação do seu cadastro.
