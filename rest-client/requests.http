@@ -7,7 +7,7 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "kaique1@email.com",
+  "email": "joao@email.com",
   "password": "123456"
 }
 
@@ -22,8 +22,8 @@ POST {{baseUrl}}/user
 Content-Type: application/json
 
 {
-  "name": "Kaique Lurdes",
-  "email": "kaique@email.com",
+  "name": "João",
+  "email": "joao@email.com",
   "password": "123456"
 }
 
@@ -34,6 +34,6 @@ Content-Type: application/json
 Authorization: Bearer {{JwtToken}}
 
 {
-  "name": "Caique Lucidez",
-  "email": "kaique1@email.com"
+  "name": "João",
+  "email": "joao@email.com"
 }
