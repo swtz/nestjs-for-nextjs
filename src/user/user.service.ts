@@ -19,6 +19,16 @@ export class UserService {
     private readonly hashingService: HashingService,
   ) {}
 
+  async failIfEmailExists(email: string) {
+    const exists = await this.userRepository.existsBy({
+      email,
+    });
+
+    if (exists) {
+      throw new ConflictException('Email já existe');
+    }
+  }
+
   async findOneByOrFail(userData: Partial<User>) {
     const user = await this.userRepository.findOneBy(userData);
 
@@ -29,19 +39,13 @@ export class UserService {
     return user;
   }
 
-  async create(dto: CreateUserDto) {
-    const exists = await this.userRepository.existsBy({
-      email: dto.email,
-    });
+  async create(userDto: CreateUserDto) {
+    await this.failIfEmailExists(userDto.email);
 
-    if (exists) {
-      throw new ConflictException('Email já existe');
-    }
-
-    const hashedPassword = await this.hashingService.hash(dto.password);
+    const hashedPassword = await this.hashingService.hash(userDto.password);
     const newUser = {
-      name: dto.name,
-      email: dto.email,
+      name: userDto.name,
+      email: userDto.email,
       password: hashedPassword,
     };
 
@@ -65,6 +69,14 @@ export class UserService {
     const user = await this.findOneByOrFail({ id });
 
     user.name = userDto.name ?? user.name;
+
+    if (userDto.email && userDto.email !== user.email) {
+      await this.failIfEmailExists(userDto.email);
+      user.email = userDto.email;
+      user.forceLogout = true;
+    }
+
+    return this.save(user);
   }
 
   save(user: User) {
