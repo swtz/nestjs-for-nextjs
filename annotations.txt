@@ -6,29 +6,3 @@ NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
 243. Atualizando o usuário (PATCH) + usando mapped-types nos DTOs do NestJS
-
-O coach-Luiz salientou que, até agora, foram feitos todas as configurações necessárias para que se
-desenvolva soluções usando uma REST API junto com essa 'feature' de segurança usando o JWT Token.
-
-A partir de agora, será desenvolvida a parte da lógica do sistema em si.
-
-A lógica desse sistema permite apenas que o usuário ATUALMENTE logado possa alterações somente SUAS informações:
-
-@UseGuards(JwtAuthGuard)
-@Patch('me')
-update(req: AuthenticatedRequest, @Body() userDto: UpdateUserDto) {
-  return this.userService.update(req.user.id, userDto);
-}
-
-Como assim?
-
--> usuário cria conta no sistema
--> usuário faz login
-  -> após fazer login, é assina um JWT Token que carrega o ID desse usuário
--> usuário acessa 'rota fechada'
-  -> @UseGuards(JwtAuthGuard) checa se autenticidade do usuário
-    -> se usuário é autêntico, retorna objeto 'user' para a requisição
--> o recurso '/user/me' acessa 'req.user.id' e dispara o método 'update' junto ao DTO enviado
-
-Notou? Não foi necessário checar o usuário por meio de uma rota dinâmica, pois o login já "salva" os
-dados do usuário que está logado. Assim, ele é AUTORIZADO somente a atualizar SEUS dados.
