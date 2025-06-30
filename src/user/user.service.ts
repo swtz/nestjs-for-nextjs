@@ -1,4 +1,9 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -14,11 +19,19 @@ export class UserService {
     private readonly hashingService: HashingService,
   ) {}
 
+  async findOneByOrFail(userData: Partial<User>) {
+    const user = await this.userRepository.findOneBy(userData);
+
+    if (!user) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
+
+    return user;
+  }
+
   async create(dto: CreateUserDto) {
-    const exists = await this.userRepository.exists({
-      where: {
-        email: dto.email,
-      },
+    const exists = await this.userRepository.existsBy({
+      email: dto.email,
     });
 
     if (exists) {
@@ -44,7 +57,11 @@ export class UserService {
     return this.userRepository.findOneBy({ id });
   }
 
-  update(id: string, userDto: UpdateUserDto) {}
+  update(id: string, userDto: UpdateUserDto) {
+    if (!userDto.name && !userDto.email) {
+      throw new BadRequestException('Dados não enviados');
+    }
+  }
 
   save(user: User) {
     return this.userRepository.save(user);
