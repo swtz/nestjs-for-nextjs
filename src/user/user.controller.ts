@@ -14,6 +14,7 @@ import { UserService } from './user.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { AuthenticatedRequest } from 'src/auth/types/authenticated-request';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserResponseDto } from './dto/user-response.dto';
 
 @Controller('user')
 export class UserController {
@@ -30,13 +31,18 @@ export class UserController {
   }
 
   @Post()
-  create(@Body() userDto: CreateUserDto) {
-    return this.userService.create(userDto);
+  async create(@Body() userDto: CreateUserDto) {
+    const user = await this.userService.create(userDto);
+    return new UserResponseDto(user);
   }
 
   @UseGuards(JwtAuthGuard)
   @Patch('me')
-  update(@Req() req: AuthenticatedRequest, @Body() userDto: UpdateUserDto) {
-    return this.userService.update(req.user.id, userDto);
+  async update(
+    @Req() req: AuthenticatedRequest,
+    @Body() userDto: UpdateUserDto,
+  ) {
+    const user = await this.userService.update(req.user.id, userDto);
+    return new UserResponseDto(user);
   }
 }
