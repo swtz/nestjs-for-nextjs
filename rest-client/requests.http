@@ -7,7 +7,7 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "kaique@email.com",
+  "email": "kaique1@email.com",
   "password": "123456"
 }
 
@@ -29,11 +29,11 @@ Content-Type: application/json
 
 ### Update user
 # @name updateUser
-POST {{baseUrl}}/user/me
+PATCH {{baseUrl}}/user/me
 Content-Type: application/json
 Authorization: Bearer {{JwtToken}}
 
 {
-  "name": "Kaique Lurdes",
-  "email": "kaique@email.com",
+  "name": "Caique Lucidez",
+  "email": "kaique1@email.com"
 }
