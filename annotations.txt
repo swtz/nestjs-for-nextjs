@@ -5,4 +5,4 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-244. Testando o update user + DTO de resposta UserResponseDto (Data Transfer Object)
+245. Atualização de senha do usuário (currentPassword e newPassword)
