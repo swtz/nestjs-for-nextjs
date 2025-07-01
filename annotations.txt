@@ -5,4 +5,4 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-247. Entity Post e entendendo synchronize e autoLoadEntities do TypeORM no NestJS
+248. DTOs do Post para validação - CreatePostDto, UpdatePostDto e PostResponseDto
