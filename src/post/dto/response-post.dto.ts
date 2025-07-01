@@ -7,8 +7,14 @@ export class ResponsePostDto {
   readonly content: string;
   readonly excerpt: string;
   readonly coverImageUrl: string;
+  readonly published: boolean;
   readonly createdAt: Date;
   readonly updatedAt: Date;
+  readonly author: {
+    id: string;
+    name: string;
+    email: string;
+  };
 
   constructor(post: Post) {
     this.id = post.id;
@@ -17,7 +23,13 @@ export class ResponsePostDto {
     this.content = post.content;
     this.excerpt = post.excerpt;
     this.coverImageUrl = post.coverImageUrl;
+    this.published = post.published;
     this.createdAt = post.createdAt;
     this.updatedAt = post.updateAt;
+    this.author = {
+      id: post.author.id,
+      name: post.author.name,
+      email: post.author.email,
+    };
   }
 }

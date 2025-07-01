@@ -12,7 +12,9 @@ export class CreatePostDto {
   title: string;
 
   @IsString({ message: 'Excerto precisa ser uma string' })
-  @Length(10, 200, { message: 'Título precisa ter entre 10 e 200 caracteres.' })
+  @Length(10, 200, {
+    message: 'Excerto precisa ter entre 10 e 200 caracteres.',
+  })
   excerpt: string;
 
   @IsString({ message: 'Conteúdo precisa ser uma string' })

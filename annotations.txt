@@ -5,4 +5,20 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-249. VS Code Rest Client - Criei todas as rotas e variáveis no arquivo requests.http
+250. Criando a relação ManyToOne no TypeORM com Post e User (Muitos para um)
+
+Lembrete:
+
+Passo a passo para usar o repositório fornecido pelo TypeORM
+
+- criar Entity
+- criar DTO
+- importar TypeOrmModule.forFeature([Entity]) mo módulo respectivo
+- injetar repositório no 'constructor' do service:
+  Exemplo:
+    @InjectRepository(Entity)
+    private readonly userRepository: Repository<Entity>,
+- usar objeto 'userRepository' para manipular a base de dados.
+
+Essa aula mostrou bem certinho como já criar e testar requisições que manipulam a base de dados.
+Também mostrou como se pode filtrar os campos de um objeto recebido por meio da classe ResponsePostDto.
