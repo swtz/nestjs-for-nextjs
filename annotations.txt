@@ -5,4 +5,4 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-248. DTOs do Post para validação - CreatePostDto, UpdatePostDto e PostResponseDto
+249. VS Code Rest Client - Criei todas as rotas e variáveis no arquivo requests.http
