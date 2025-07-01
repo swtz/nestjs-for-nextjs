@@ -5,4 +5,4 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-246. Lendo (READ - GET) e apagando (DELETE) o usuário que está logado
+247. Entity Post e entendendo synchronize e autoLoadEntities do TypeORM no NestJS
