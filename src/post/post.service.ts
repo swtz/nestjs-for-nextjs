@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -14,6 +19,25 @@ export class PostService {
     @InjectRepository(Post)
     private readonly postRepository: Repository<Post>,
   ) {}
+
+  async findOneOrFail(postData: Partial<Post>) {
+    const post = await this.findOne(postData);
+
+    if (!post) {
+      throw new NotFoundException('Post não encontrado');
+    }
+
+    return post;
+  }
+
+  async findOne(postData: Partial<Post>) {
+    const post = await this.postRepository.findOne({
+      where: postData,
+      relations: ['author'],
+    });
+
+    return post;
+  }
 
   async create(postDto: CreatePostDto, author: User) {
     const post = this.postRepository.create({

@@ -5,4 +5,4 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-251. Criando a slug do post e usando o Logger do NestJS para exibir logs de erro
+252. Criando findAllOwned e findOneOwned Post para ver os posts do usuário logado
