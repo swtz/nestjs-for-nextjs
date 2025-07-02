@@ -6,3 +6,21 @@ NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
 251. Criando a slug do post e usando o Logger do NestJS para exibir logs de erro
+
+Sobre o tratamentos de erros em uma aplicação NestJS:
+
+[arquivo post.service.ts]:
+
+const created = await this.postRepository
+  .save(post)
+  .catch((err: unknown) => {
+    throw new BadRequestException('Erro ao criar o post');
+  });
+
+O código acima mostra uma maneira de capturar um erro que o 'postRepository' iria
+lançar caso não fosse possível salvar o 'post' na base de dados e lançar outra
+exceção no lugar, para que seja possível informar o usuário adequadamente do que
+aconteceu. Entretanto, ainda assim há uma exceção não tratada a qual carrega uma informação
+útil para o desenvolvedor ou para alguém que esteja usando a API dessa aplicação.
+Assim é possível "logar" esse erro para que seja exibido em um terminal, console ou que seja
+salvo em algum arquivo de log.
