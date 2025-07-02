@@ -17,12 +17,12 @@ export class PostService {
 
   async create(postDto: CreatePostDto, author: User) {
     const post = this.postRepository.create({
-      // slug: 'caiu-na-pegadinha-' + Math.random().toString(36).substring(2, 8), // slug temporário
       slug: createSlugFromText(postDto.title),
-      title: postDto.title,
-      excerpt: postDto.excerpt,
-      content: postDto.content,
       author,
+      content: postDto.content,
+      excerpt: postDto.excerpt,
+      coverImageUrl: postDto.coverImageUrl,
+      title: postDto.title,
     });
 
     const created = await this.postRepository
