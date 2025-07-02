@@ -39,6 +39,28 @@ export class PostService {
     return post;
   }
 
+  async findOneOwnedOrFail(postData: Partial<Post>, author: User) {
+    const post = await this.findOneOwned(postData, author);
+
+    if (!post) {
+      throw new NotFoundException('Post não encontrado');
+    }
+
+    return post;
+  }
+
+  async findOneOwned(postData: Partial<Post>, author: User) {
+    const post = await this.postRepository.findOne({
+      where: {
+        ...postData,
+        author: { id: author.id },
+      },
+      relations: ['author'],
+    });
+
+    return post;
+  }
+
   async create(postDto: CreatePostDto, author: User) {
     const post = this.postRepository.create({
       slug: createSlugFromText(postDto.title),
