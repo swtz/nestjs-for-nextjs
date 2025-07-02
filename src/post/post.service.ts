@@ -61,6 +61,20 @@ export class PostService {
     return post;
   }
 
+  async findAllOwned(author: User) {
+    const posts = await this.postRepository.find({
+      where: {
+        author: { id: author.id },
+      },
+      order: {
+        createdAt: 'DESC',
+      },
+      relations: ['author'],
+    });
+
+    return posts;
+  }
+
   async create(postDto: CreatePostDto, author: User) {
     const post = this.postRepository.create({
       slug: createSlugFromText(postDto.title),
