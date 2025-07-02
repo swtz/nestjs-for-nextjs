@@ -9,18 +9,23 @@ Aula:
 
 Sobre o tratamentos de erros em uma aplicação NestJS:
 
-[arquivo post.service.ts]:
+O NestJs permite usar uma classe 'Logger' para exibir erros no terminal:
 
-const created = await this.postRepository
-  .save(post)
-  .catch((err: unknown) => {
-    throw new BadRequestException('Erro ao criar o post');
-  });
+export class PostService {
+  private readonly logger = new Logger(PostService.name);
 
-O código acima mostra uma maneira de capturar um erro que o 'postRepository' iria
-lançar caso não fosse possível salvar o 'post' na base de dados e lançar outra
-exceção no lugar, para que seja possível informar o usuário adequadamente do que
-aconteceu. Entretanto, ainda assim há uma exceção não tratada a qual carrega uma informação
-útil para o desenvolvedor ou para alguém que esteja usando a API dessa aplicação.
-Assim é possível "logar" esse erro para que seja exibido em um terminal, console ou que seja
-salvo em algum arquivo de log.
+  // service methods...
+
+  const created = await this.postRepository
+    .save(post)
+    .catch((err: unknown) => {
+      if (err instanceof Error) { <---
+        this.logger.error('Erro ao criar post', err.stack); <---
+      }
+
+      throw new BadRequestException('Erro ao criar o post');
+    });
+}
+
+Assim, o erro que anteriormente estava "oculto" é exibido no console e pode
+ajudar o desenvolvedor a verificar o porquê o post não foi salvo na base de dados.
