@@ -5,4 +5,4 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-253. Criando o update Post para atualizar os dados do Post
+254. Criando o restante das rotas do Post + onDelete CASCADE no TypeORM e SQL
