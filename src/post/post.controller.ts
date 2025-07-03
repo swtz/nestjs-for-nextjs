@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseUUIDPipe,
@@ -55,6 +56,16 @@ export class PostController {
     @Body() postDto: UpdatePostDto,
   ) {
     const post = await this.postService.update({ id }, postDto, req.user);
+    return new ResponsePostDto(post);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('me/:id')
+  async remove(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Req() req: AuthenticatedRequest,
+  ) {
+    const post = await this.postService.remove({ id }, req.user);
     return new ResponsePostDto(post);
   }
 }
