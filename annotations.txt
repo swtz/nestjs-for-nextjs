@@ -6,10 +6,3 @@ NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
 254. Criando o restante das rotas do Post + onDelete CASCADE no TypeORM e SQL
-
-Ao criar um método que DELETA registros na base de dados com base em um parâmetro
-dinâmico, por exemplo, é preciso tomar muito cuidado caso exista uma rota que permita
-a requisição sem esse parâmetro dinâmico usando esse método de DELETAR, pois pode ser
-que aconteça de se fazer uma consulta e uma operação de DELETE sem a condicional 'where'.
-Assim, essa tabela é literalmente esvaziada e seus registros serão perdidos caso não
-haja nenhum backup dela.
