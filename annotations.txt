@@ -5,10 +5,4 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-252. Criando findAllOwned e findOneOwned Post para ver os posts do usuário logado
-
-Dica para contornar erros relacionado à tipagem de objetos quando se retorna um array deles:
-
-return posts.map(post => new ResponsePostDto(post));
-
-Assim é retornado um array em que cada item é do tipo ResponsePostDto.
+253. Criando o update Post para atualizar os dados do Post

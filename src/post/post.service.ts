@@ -10,6 +10,7 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { User } from 'src/user/entities/user.entity';
 import { Post } from './entities/post.entity';
 import { createSlugFromText } from 'src/common/utils/create-slug-from-text';
+import { UpdatePostDto } from './dto/update-post.dto';
 
 @Injectable()
 export class PostService {
@@ -96,5 +97,21 @@ export class PostService {
       });
 
     return created;
+  }
+
+  async update(postData: Partial<Post>, postDto: UpdatePostDto, author: User) {
+    if (Object.keys(postDto).length === 0) {
+      throw new BadRequestException('Dados não enviados');
+    }
+
+    const post = await this.findOneOwnedOrFail(postData, author);
+
+    post.title = postDto.title ?? post.title;
+    post.content = postDto.content ?? post.content;
+    post.excerpt = postDto.excerpt ?? post.excerpt;
+    post.coverImageUrl = postDto.coverImageUrl ?? post.coverImageUrl;
+    post.published = postDto.published ?? post.published;
+
+    return this.postRepository.save(post);
   }
 }
