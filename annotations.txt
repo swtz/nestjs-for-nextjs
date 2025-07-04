@@ -5,4 +5,30 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-256. Upload de imagem, ServeStaticModule, Multer, file-type e mais para segurança
+257. Criando um filter de exceptions para padronizar os erros no NestJs (APP_FILTER)
+
+Dica do coach-Luiz ao desenvolver um sistema de REST API:
+
+Sempre padronizar as mensagens de erro, pois isso pode se tornar uma grande dor de cabeça no frontend.
+
+O NestJS possui Filtros que podem ser usados durante uma requisição para capturar esses erros, a fim
+de fazer alguma coisa com eles. Nessa aula TODAS AS EXCEÇÕES POSSÍVEIS serão padronizadas.
+
+Algo que é importante meditar é que o NestJS usa como base a classe HttpException para todos os erros
+relacionados às requisições HTTP. Assim, toda exceção que não tiver essa original será lançada como
+INTERNAL_SERVER_ERROR. Exemplo:
+
+@Controller()
+export class UploadController {
+  @Get()
+  foo() {
+    throw new Error('Aconteceu algo inesperado.');
+    return 'bar';
+  }
+}
+
+Quando for feita uma requisição para a rota acima, será lançada um INTERNAL_SERVER_ERROR como erro, porque
+a exceção lançada É DIFERENTE DE UMA EXCEÇÃO QUE IMPLEMENTA A CLASSE HttpException.
+
+Essa padronização vai ser útil, pois a resposta desses erros costumam ser diferentes uns dos outros.
+A implementação dessa classe de Filtro, vai facilitar a vida no frontend depois.
