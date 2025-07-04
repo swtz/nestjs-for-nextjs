@@ -5,6 +5,11 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-255. Cuidados com rotas fixas e dinâmicas e colisão de nomes e métodos
+256. Upload de imagem, ServeStaticModule, Multer, file-type e mais para segurança
 
-A dica é, ao desenvolver um REST API, fazer um arquivo semelhante ao REQUEST-REPONSE.md
+npm i -D @types/multer
+npm i file-type
+
+npx nest g mo upload
+npx nest g co upload --no-spec
+npx nest g s upload --no-spec
