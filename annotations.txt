@@ -7,10 +7,27 @@ NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 Aula:
 256. Upload de imagem, ServeStaticModule, Multer, file-type e mais para segurança
 
-Sobre o arquivo src/upload/upload.config.ts:
+[arquivo 'controller']:
 
-É criado um 'storage' usando o método 'memoryStorage' do pacote 'multer';
+@Controller('upload')
+export class UploadController {
+  constructor(private readonly uploadService: UploadService) {}
 
-O 'multer' é a ferramenta que o servidor express usa para fazer upload de arquivos.
-Esse método armazena os bytes do arquivo na memória RAM do computador.
-Caso o upload do arquivo falhe, esse arquivo é esvaziado da memória.
+  @Post()
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(FileInterceptor('file', { storage, limits, fileFilter }))
+  uploadFile(@UploadedFile() file: Express.Multer.File) {
+    return this.uploadService.handleUpload(file);
+  }
+}
+
+As linhas 17 e 18 são as maneiras que o NestJS usa para interromper a requisição caso
+algo aconteça de inesperado. Nesse caso, a linha 17 é caso o usuário não esteja autenticado
+e a linha 18 são usados @UseInterceptors e FileInterceptor que a própria documentação do NestJS
+recomenda usar quando se faz o upload de um arquivo.
+
+O objeto que é passado no arg1 de 'FileInterceptor' são as coisas exportadas do arquivo 'upload.config.ts'
+que o NestJS usa para receber o arquivo que foi enviado usando o Express como plataforma.
+
+Por fim, é usado @UploadFile no método 'uploadFile' o qual recebe o arquivo que veio pela requisição.
+Esse decorator é usado para receber arquivos únicos.
