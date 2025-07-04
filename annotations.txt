@@ -7,27 +7,20 @@ NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 Aula:
 256. Upload de imagem, ServeStaticModule, Multer, file-type e mais para segurança
 
-[arquivo 'controller']:
+O arquivo 'service' não foi desenvolvido na íntegra na aula, mas o coach-Luiz explicou
+ele linha a linha, portanto, caso haja dúvidas, é interessante reassistir a aula para observar
+os detalhes da implementação.
 
-@Controller('upload')
-export class UploadController {
-  constructor(private readonly uploadService: UploadService) {}
+O que me chamou atenção?
 
-  @Post()
-  @UseGuards(JwtAuthGuard)
-  @UseInterceptors(FileInterceptor('file', { storage, limits, fileFilter }))
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
-    return this.uploadService.handleUpload(file);
-  }
-}
+1 → Todas as checagens do arquivo foram feitas no 'service' como tamanho do aquivo, se foi enviado
+algum arquivo de fato e se o tipo dele é compatível com ao de uma imagem;
 
-As linhas 17 e 18 são as maneiras que o NestJS usa para interromper a requisição caso
-algo aconteça de inesperado. Nesse caso, a linha 17 é caso o usuário não esteja autenticado
-e a linha 18 são usados @UseInterceptors e FileInterceptor que a própria documentação do NestJS
-recomenda usar quando se faz o upload de um arquivo.
+2 → Algumas instruções usadas nas condicionais que verificam o 'mimetype' do arquivo:
 
-O objeto que é passado no arg1 de 'FileInterceptor' são as coisas exportadas do arquivo 'upload.config.ts'
-que o NestJS usa para receber o arquivo que foi enviado usando o Express como plataforma.
+!['image/png', 'image/jpeg', 'image/webp', 'image/gif'].includes(
+  fileType.mime,
+)
 
-Por fim, é usado @UploadFile no método 'uploadFile' o qual recebe o arquivo que veio pela requisição.
-Esse decorator é usado para receber arquivos únicos.
+3 → Após as checagens do arquivo, os métodos do node.js usados para criar diretórios, montar o arquivo
+e salvá-lo no lugar desejado de modo dinâmico.
