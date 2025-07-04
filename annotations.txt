@@ -7,9 +7,10 @@ NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 Aula:
 256. Upload de imagem, ServeStaticModule, Multer, file-type e mais para segurança
 
-npm i -D @types/multer
-npm i file-type
+Sobre o arquivo src/upload/upload.config.ts:
 
-npx nest g mo upload
-npx nest g co upload --no-spec
-npx nest g s upload --no-spec
+É criado um 'storage' usando o método 'memoryStorage' do pacote 'multer';
+
+O 'multer' é a ferramenta que o servidor express usa para fazer upload de arquivos.
+Esse método armazena os bytes do arquivo na memória RAM do computador.
+Caso o upload do arquivo falhe, esse arquivo é esvaziado da memória.
