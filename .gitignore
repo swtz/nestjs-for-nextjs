@@ -1,5 +1,7 @@
 # custom
 db.sqlite
+/uploads
+/dev
 
 # compiled output
 /dist

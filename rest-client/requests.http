@@ -108,7 +108,7 @@ Content-Type: application/json
 Authorization: Bearer {{jwtToken}}
 
 {
-  "title": "DELETE - Título do post",
+  "title": "NOVO - Título do post",
   "excerpt": "NOVO - Excerto",
   "content": "NOVO - Conteúdo",
   "published": true
@@ -128,10 +128,10 @@ Authorization: Bearer {{jwtToken}}
 Content-Type: multipart/form-data; boundary=----BryenFormBoundary
 
 ------BryenFormBoundary
-Content-Disposition: form-data; name="file"; filename="exemplo.png"
+Content-Disposition: form-data; name="file"; filename="svg-bkg-sun-tornado-blue.png"
 Content-Type: image/png
 
-< ../dev/images/sample-image.jpeg
+< ../dev/images/svg-bkg-sun-tornado-blue.png
 ------BryenFormBoundary--
 
 ### Read Image

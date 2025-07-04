@@ -6,5 +6,3 @@ NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
 256. Upload de imagem, ServeStaticModule, Multer, file-type e mais para segurança
-
-npm i @nestjs/serve-static | pacote usado no ambiente de desenvolvimento para servir as imagens de modo estático
