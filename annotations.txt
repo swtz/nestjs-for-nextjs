@@ -7,20 +7,4 @@ NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 Aula:
 256. Upload de imagem, ServeStaticModule, Multer, file-type e mais para segurança
 
-O arquivo 'service' não foi desenvolvido na íntegra na aula, mas o coach-Luiz explicou
-ele linha a linha, portanto, caso haja dúvidas, é interessante reassistir a aula para observar
-os detalhes da implementação.
-
-O que me chamou atenção?
-
-1 → Todas as checagens do arquivo foram feitas no 'service' como tamanho do aquivo, se foi enviado
-algum arquivo de fato e se o tipo dele é compatível com ao de uma imagem;
-
-2 → Algumas instruções usadas nas condicionais que verificam o 'mimetype' do arquivo:
-
-!['image/png', 'image/jpeg', 'image/webp', 'image/gif'].includes(
-  fileType.mime,
-)
-
-3 → Após as checagens do arquivo, os métodos do node.js usados para criar diretórios, montar o arquivo
-e salvá-lo no lugar desejado de modo dinâmico.
+npm i @nestjs/serve-static | pacote usado no ambiente de desenvolvimento para servir as imagens de modo estático
