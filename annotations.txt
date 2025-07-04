@@ -5,22 +5,6 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-254. Criando o restante das rotas do Post + onDelete CASCADE no TypeORM e SQL
+255. Cuidados com rotas fixas e dinâmicas e colisão de nomes e métodos
 
-SQLITE_CONSTRAINT_FOREIGNKEY -> esse erro é lançado pela base de dados quando
-se tenta apagar uma registro de uma entidade que pertence a uma relação na
-base de dados.
-
-Nessa aplicação, a tabela 'Post' possui um foreign_key que referência um campo
-da tabela 'User'. Assim, quando o usuário tenta apagar uma instância de 'User', é lançado
-esse erro, pois a tabela 'Post' é dona dessa relação.
-
-Para resolver:
-
-[no arquivo post.entity.ts]:
-
-@ManyToOne(() => User, { onDelete: 'CASCADE' })
-  author: User;
-
-CASCADE -> todos as instâncias de 'Post' que tiverem o ID da instância de 'User' que está
-sendo deletado, serão deletadas também.
+A dica é, ao desenvolver um REST API, fazer um arquivo semelhante ao REQUEST-REPONSE.md
