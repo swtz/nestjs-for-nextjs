@@ -5,21 +5,4 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-259. Rate Limiting - ThrottlerModule - Protegendo a API Rest contra abusos no NestJs
-
-npm i @nestjs/throttler
-
-Configurações do ThrottlerModule [arquivo app.module.ts]:
-
-ThrottlerModule.forRoot({
-  throttlers: [
-    {
-      ttl: 10000, // time to live (tempo de vida)
-      limit: 10, // limite de requisições por ttl
-      blockDuration: 5000, // 5s de bloqueio caso haja > 10 req durante 10s
-    },
-  ],
-}),
-
-Esse módulo possui um 'Guard', ou seja, é possível colocá-lo em um rota específica ou na aplicação
-inteira se desejar.
+260. Build do NestJs, rodando em produção e .env-example para variáveis de ambiente
