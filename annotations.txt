@@ -5,8 +5,4 @@ Seção 4:
 NestJS 11 para Rest API com autenticação JWT - Back-end para Blog em Next.js
 
 Aula:
-258. Cross-Origin Resource Sharing (CORS) e Helmet (Cabeçalhos HTTP de segurança)
-
-npm i --save helmet
-
-Aula bem interessante para entender sobre CORS, Helmet e CSRF Protection.
+259. Rate Limiting - ThrottlerModule - Protegendo a API Rest contra abusos no NestJs
